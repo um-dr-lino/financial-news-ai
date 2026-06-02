@@ -1,17 +1,9 @@
 import axios from 'axios';
 
-const getApiUrl = () => {
-  if (import.meta.env.PROD) {
-    return '/api';
-  }
-  return import.meta.env.VITE_API_URL || 'http://localhost:3000';
-};
-
 const api = axios.create({
-  baseURL: getApiUrl( ),
-});
+  baseURL: import.meta.env.PROD ? '/api' : 'http://localhost:3000',
+} );
 
-// Interceptor para adicionar token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -20,7 +12,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor para tratamento de erros
 api.interceptors.response.use(
   (response) => response,
   (error) => {
