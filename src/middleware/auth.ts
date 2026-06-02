@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import type { JWTPayload } from "../types/auth.ts";
+import type { JWTPayload } from "../types/auth.js";
 
 declare global {
   namespace Express {
