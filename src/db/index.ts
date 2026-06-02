@@ -9,11 +9,16 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+// Pool de conexão otimizado para Vercel Serverless
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  // Configurações otimizadas para serverless
   connectionTimeoutMillis: 5000,
   query_timeout: 30000,
+  max: 1, // Limite máximo de conexões simultâneas em serverless
+  idleTimeoutMillis: 30000,
+  application_name: "financial-news-ai",
 });
 
 pool.on("error", (err) => {
