@@ -1,14 +1,6 @@
 {
   "buildCommand": "npm run build && npm run build:frontend",
   "outputDirectory": ".",
-  "framework": "express",
-  "functions": {
-    "api/index.ts": {
-      "runtime": "nodejs20.x",
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
