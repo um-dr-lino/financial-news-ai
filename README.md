@@ -194,8 +194,8 @@ No painel do Vercel, adicione as seguintes variáveis (Environment Variables):
 curl -X POST https://seu-projeto.vercel.app/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "João Silva",
-    "email": "joao@example.com",
+    "name": "Alysson Lino",
+    "email": "lino@email.com",
     "password": "senha123"
   }'
 ```
@@ -205,10 +205,11 @@ curl -X POST https://seu-projeto.vercel.app/auth/register \
 curl -X POST https://seu-projeto.vercel.app/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "joao@example.com",
+    "email": "lino@email.com",
     "password": "senha123"
   }'
 ```
+
 
 ### 3. Atualizar preferências
 ```bash
@@ -261,9 +262,9 @@ MIT
 
 ## 👤 Autor
 
-Desenvolvido como desafio técnico para Manchester Investimentos
+Desenvolvido como desafio técnico para Manchester Investimentos para a vaga de desenvolvedor fullstack
 
 ---
 
-**Pronto para começar?** Clone o repositório e siga as instruções acima!
+
 
