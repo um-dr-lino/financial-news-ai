@@ -1,11 +1,17 @@
 import axios from 'axios';
 
-const API_URL = '/api';
+const getApiUrl = () => {
+  if (import.meta.env.PROD) {
+    return '/api';
+  }
+  return import.meta.env.VITE_API_URL || 'http://localhost:3000';
+};
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: getApiUrl( ),
 });
 
+// Interceptor para adicionar token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -14,6 +20,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Interceptor para tratamento de erros
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -29,18 +36,21 @@ api.interceptors.response.use(
 );
 
 export const authService = {
-  login: (credentials: any) => api.post('/auth/login', credentials),
-  register: (userData: any) => api.post('/auth/register', userData),
+  register: (name: string, email: string, password: string) =>
+    api.post('/auth/register', { name, email, password }),
+  login: (email: string, password: string) =>
+    api.post('/auth/login', { email, password }),
 };
 
-export const preferenceService = {
-  getPreferences: () => api.get('/preferences'),
-  updatePreferences: (preferences: string[]) => api.put('/preferences', { preferences }),
+export const preferencesService = {
+  get: () => api.get('/preferences'),
+  update: (preferences: string[]) =>
+    api.put('/preferences', { preferences }),
 };
 
 export const feedService = {
-  getFeed: () => api.get('/feed'),
-  refreshFeed: () => api.post('/feed/refresh'),
+  get: () => api.get('/feed'),
+  refresh: () => api.post('/feed/refresh'),
 };
 
 export default api;
