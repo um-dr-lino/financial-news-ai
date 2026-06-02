@@ -10,12 +10,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(["/api/auth", "/auth"], authRoutes);
-app.use(["/api/preferences", "/preferences"], preferencesRoutes);
-app.use(["/api/feed", "/feed"], feedRoutes);
+app.use("/auth", authRoutes);
+app.use("/preferences", preferencesRoutes);
+app.use("/feed", feedRoutes);
 
-app.get(["/api/health", "/health"], (req, res) => {
-  res.json({ status: "ok", env: process.env.NODE_ENV });
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
 export default app;
